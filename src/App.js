@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
+const Loader = ({fullScreen}) => {
+  console.log(document.getElementsByClassName("loader"))
+  return(
+    <div className={fullScreen ? "fullscreen" : "loader-area"}>
+      <div className='loader'></div>
+
+    </div>
+  )
+
+}
+
 function App() {
+  const [isLoading, setIsLoading ] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setIsLoading(false)
+    }, 5000)
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Loader</h1>
+      { isLoading ? 
+      (<Loader fullScreen={false}/>) : 
+      (<div>Type something to see the magic</div>)}
+
+
     </div>
   );
 }
+
 
 export default App;
